@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import ReactMarkdown from 'react-markdown';
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import ReactMarkdown from "react-markdown";
 
+// defaultMarkdown contains valid markdown that represents at least one of each of the following elements: a header (H1 size), a sub header (H2 size), a link, inline code, a code block, a list item, a blockquote, an image, and bolded text
 const defaultMarkdown = `
 # Welcome to my React Markdown Previewer!
 
@@ -23,6 +24,7 @@ function anotherExample(firstLine, lastLine) {
 You can also make text **bold**... whoa!
 Or _italic_.
 Or... **_both!_**
+
 There's also [links](https://www.freecodecamp.com), and
 > Block Quotes!
 
@@ -34,25 +36,27 @@ There's also [links](https://www.freecodecamp.com), and
         - That look like this.
 `;
 
-
 function App() {
-  const [markdownText, setMarkdownText] = useState<string>(defaultMarkdown)
+  const [markdownText, setMarkdownText] = useState<string>(defaultMarkdown);
 
   return (
     <>
       <div>
-        <h1>Markdown Previewer</h1>
+        <h1 style={{ textAlign: "center" }}>Markdown Previewer</h1>
         <div className="boxes-container">
-          <textarea name="editor" id="editor">
-            <div className="preview">
-              <ReactMarkdown>{markdownText}</ReactMarkdown>
-            </div>
-          </textarea>
+          <textarea
+            name="editor"
+            id="editor"
+            value={markdownText}
+            onChange={(e) => setMarkdownText(e.target.value)}
+          ></textarea>
+          <div id="preview">
+            <ReactMarkdown>{markdownText}</ReactMarkdown>
+          </div>
         </div>
       </div>
-      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
